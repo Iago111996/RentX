@@ -1,7 +1,13 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { StatusBar } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/stack.routes';
 
 import LogoSvg from '../../assets/logo.svg';
+import { CardCar } from '../../components/CardCar';
 
 import {
   Container,
@@ -9,10 +15,17 @@ import {
   TotalCar,
   CarList
   } from './styles';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { CardCar } from '../../components/CardCar';
+
+type homeScreenProp = StackNavigationProp<RootStackParamList>;
+
 
 export const Home = () => {
+  const navigation = useNavigation<homeScreenProp>();
+
+  const handleCarDetails = () => {
+    navigation.navigate('CarDetails');
+  }
+  
   const dataCar = {
     brand: 'AUDI',
     name: 'RS 4 Coupé',
@@ -26,7 +39,8 @@ export const Home = () => {
   return(
     <Container>
       <StatusBar 
-        style="light"
+        barStyle="light-content"
+        backgroundColor="transparent"
         translucent
       />
       <Header>
@@ -41,7 +55,12 @@ export const Home = () => {
       <CarList 
         data={[1,2,3,4,5,6,7]}
         keyExtractor={item => String(item)}
-        renderItem={({ item }) =>  <CardCar data={dataCar} />}
+        renderItem={({ item }) => 
+          <CardCar 
+            data={dataCar} 
+            onPress={handleCarDetails}
+          />
+        }
       />
      
 

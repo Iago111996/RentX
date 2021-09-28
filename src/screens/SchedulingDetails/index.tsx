@@ -8,6 +8,10 @@ import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Button } from '../../components/Button';
 
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/stack.routes';
+
 import SpeedSvg from '../../assets/speed.svg';
 import AccelerationSvg from '../../assets/acceleration.svg';
 import ForceSvg from '../../assets/force.svg';
@@ -41,6 +45,9 @@ import {
   RentalPriceTotal
 } from './styles';
 
+type SchedulingDetailsScreenProp = StackNavigationProp<RootStackParamList>;
+
+
 interface Data {
   brand: string;
   name: string;
@@ -57,6 +64,12 @@ interface Props {
 
 export const SchedulingDetails  = () => {
   const theme = useTheme();
+
+  const navigation = useNavigation<SchedulingDetailsScreenProp>();
+
+  const handleConfirmRental = () => {
+    navigation.navigate('SchedulingComplite');
+  }
 
   const data = {
     brand: 'Lamboorghini',
@@ -156,8 +169,9 @@ export const SchedulingDetails  = () => {
 
       <Footer>
         <Button
-          title="Aludar agora"
+          title="Alugar agora"
           color={theme.colors.success}
+          onPress={handleConfirmRental}
         />
       </Footer>
       

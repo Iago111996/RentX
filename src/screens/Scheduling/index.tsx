@@ -8,6 +8,10 @@ import { StatusBar } from 'expo-status-bar';
 import { Button } from '../../components/Button';
 import { Calendar } from '../../components/Calendar';
 
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/stack.routes';
+
 import {
   Container,
   Header,
@@ -20,9 +24,16 @@ import {
   Footer,
 } from './styles';
 
+type SchedulingScreenProp = StackNavigationProp<RootStackParamList>;
 
 export const Scheduling = () => {
   const theme = useTheme();
+
+  const navigation = useNavigation<SchedulingScreenProp>();
+
+  const handleConfirmRental = () => {
+    navigation.navigate('SchedulingDetails');
+  }
 
   return(
     <Container>
@@ -59,7 +70,10 @@ export const Scheduling = () => {
     </Content>
 
     <Footer>
-      <Button title="Confirmar" />
+      <Button 
+        title="Confirmar"
+        onPress={handleConfirmRental}
+      />
     </Footer>
 
     </Container>

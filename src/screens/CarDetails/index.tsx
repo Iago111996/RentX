@@ -1,5 +1,7 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 
+import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
@@ -10,6 +12,11 @@ import ForceSvg from '../../assets/force.svg';
 import GasolineSvg from '../../assets/gasoline.svg';
 import ExchangeSvg from '../../assets/exchange.svg';
 import PeopleSvg from '../../assets/people.svg';
+
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/stack.routes';
+
 import {
   Container,
   Header,
@@ -26,7 +33,8 @@ import {
   Acessores,
   Footer,
 } from './styles';
-import { Button } from '../../components/Button';
+
+type CarDetailsScreenProp = StackNavigationProp<RootStackParamList>;
 
 interface Data {
   brand: string;
@@ -43,6 +51,12 @@ interface Props {
 }
 
 export const CarDetails  = () => {
+  const navigation = useNavigation<CarDetailsScreenProp>();
+
+  const handleConfirmRental = () => {
+    navigation.navigate('Scheduling');
+  }
+
   const data = {
     brand: 'Lamboorghini',
     name: 'RS 4 Coupé',
@@ -53,6 +67,11 @@ export const CarDetails  = () => {
     thumbnail: 'https://img1.gratispng.com/20180204/fzw/kisspng-audi-sportback-concept-car-dealership-audi-a7-audi-5a777382186493.4596512015177777940999.jpg'}
   return(
     <Container>
+       <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
       <Header>
         <BackButton onPress={() => {}} />
       </Header>
@@ -114,6 +133,7 @@ export const CarDetails  = () => {
       <Footer>
         <Button
           title="Escolher período do aluguel"
+          onPress={handleConfirmRental}
         />
       </Footer>
       
