@@ -43,7 +43,9 @@ export const About = styled.View`
   justify-content: space-between;
 `;
 
-export const Rent = styled.View``;
+export const Rent = styled.View`
+  margin-right: 25px;
+`;
 
 export const Period = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};

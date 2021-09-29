@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useTheme } from 'styled-components';
 import { BackButton } from '../../components/BackButton';
 
@@ -6,7 +6,13 @@ import ArrowSvg from '../../assets/arrow.svg';
 
 import { StatusBar } from 'expo-status-bar';
 import { Button } from '../../components/Button';
-import { Calendar } from '../../components/Calendar';
+
+import { 
+  Calendar,
+  DayProps, 
+  MarketDateProps,
+  generatInterval
+} from '../../components/Calendar';
 
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -26,7 +32,18 @@ import {
 
 type SchedulingScreenProp = StackNavigationProp<RootStackParamList>;
 
+interface RentalPeriod {
+  start: number;
+  startFormatted: string;
+  end: number;
+  endFormatted: string;
+}
+
 export const Scheduling = () => {
+  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps);
+  const [markedDates, setMarkedDates] = useState<MarketDateProps>({} as MarketDateProps);
+  const [rentalPeriod, steRentalPeriod] = useState();
+
   const theme = useTheme();
 
   const navigation = useNavigation<SchedulingScreenProp>();
@@ -35,12 +52,30 @@ export const Scheduling = () => {
     navigation.navigate('SchedulingDetails');
   }
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  }
+
+  const handleChangeDate = (date: DayProps) => {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
+
+    if(start.timestamp > end.timestamp) {
+      start = end;
+      end = start;
+    }
+
+    setLastSelectedDate(end);
+    const interval = generatInterval(start, end);
+    setMarkedDates(interval);
+  }
+
   return(
     <Container>
       <StatusBar style="light" />
     <Header>
       <BackButton 
-        onPress={() => {}}
+        onPress={handleGoBack}
         color={theme.colors.main_light}
       />
 
@@ -66,7 +101,10 @@ export const Scheduling = () => {
     </Header>
 
     <Content>
-      <Calendar />
+      <Calendar 
+        markedDates={markedDates}
+        onDayPress={handleChangeDate}
+      />
     </Content>
 
     <Footer>

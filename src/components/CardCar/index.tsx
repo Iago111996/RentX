@@ -1,7 +1,12 @@
 import React from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { RectButtonProps } from 'react-native-gesture-handler';
+
 import GasolineSvg from '../../assets/gasoline.svg';
+
+import { getAccessoryIcon } from '../../global/utils/getAccessoryIcon';
+
+import { CarDTO } from '../../ditos/CarDTO';
 
 import {
   Brand,
@@ -16,24 +21,16 @@ import {
   CardImage
 } from './styles';
 
-interface Data {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  },
-  thumbnail: string;
-}
-
 interface Props extends RectButtonProps {
- data: Data;
+ data: CarDTO;
 }
 
 export const CardCar = ({ 
   data,
   ...rest
 }: Props) => {
+  const MotorIcon = getAccessoryIcon(data.fuel_type);
+
   return(
     <Container {...rest}>
       <Details>
@@ -47,7 +44,7 @@ export const CardCar = ({
           </Rent>
 
           <Type>
-            <GasolineSvg 
+            <MotorIcon 
               width={RFValue(17)}
               height={RFValue(22)}
             />

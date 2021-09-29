@@ -71,6 +71,10 @@ export const SchedulingDetails  = () => {
     navigation.navigate('SchedulingComplite');
   }
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  }
+
   const data = {
     brand: 'Lamboorghini',
     name: 'RS 4 Coupé',
@@ -82,7 +86,7 @@ export const SchedulingDetails  = () => {
   return(
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleGoBack} />
       </Header>
 
       <CarImage>
