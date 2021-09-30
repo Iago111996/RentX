@@ -36,27 +36,13 @@ interface Params {
   car: CarDTO;
 }
 
-interface Data {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  },
-  thumbnail: string;
-}
-
-interface Props {
- data: Data;
-}
-
 export const CarDetails  = () => {
   const navigation = useNavigation<CarDetailsScreenProp>();
   const route = useRoute();
   const { car } = route.params as Params;
 
   const handleConfirmRental = () => {
-    navigation.navigate('Scheduling');
+    navigation.navigate('Scheduling', { car });
   }
 
   const handleGoBack = () => {

@@ -18,6 +18,7 @@ import theme from './src/global/styles/theme';
 import { Routes } from './src/routes/index';
 
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
