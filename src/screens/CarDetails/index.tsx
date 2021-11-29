@@ -42,7 +42,7 @@ export const CarDetails  = () => {
   const { car } = route.params as Params;
 
   const handleConfirmRental = () => {
-    navigation.navigate('Scheduling', { car });
+    navigation.navigate('Scheduling', { car } as any);
   }
 
   const handleGoBack = () => {

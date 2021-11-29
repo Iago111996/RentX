@@ -55,6 +55,7 @@ export const Scheduling = () => {
   const navigation = useNavigation<SchedulingScreenProp>();
   const route = useRoute();
   const { car } = route.params as Params;
+  
   const handleConfirmRental = () => {
     if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted){
       Alert.alert("Selecione o intervalo para alugar.");
@@ -62,7 +63,7 @@ export const Scheduling = () => {
       navigation.navigate('SchedulingDetails', {
         car,
         dates: Object.keys(markedDates)
-      });
+      } as any);
     }
   }
 

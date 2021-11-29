@@ -38,12 +38,13 @@ export const Home = () => {
 
 
   const handleCarDetails = (car: CarDTO) => {
-    navigation.navigate('CarDetails',{car});
+    navigation.navigate('CarDetails', {car} as any);
   }
 
   const handleOpenMyCars = () => {
     navigation.navigate('MyCars');
   }
+  // https://Iago111996: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@github.com/duplatech/platform_v1
   
   async function fetchCars() {
     try {
@@ -74,7 +75,7 @@ export const Home = () => {
           height={RFValue(18)}
         />
 
-        <TotalCar>Total de 12 carros</TotalCar>
+        <TotalCar>{`Total de ${cars.length} carros`}</TotalCar>
       </Header>
 
       { loading ? <Load /> :
