@@ -10,6 +10,8 @@ export const Container = styled.View`
 `;
 
 export const ImageIndexs = styled.View`
+  margin-right: 24px;
+  
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
